@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import com.devsuperior.movieflix.dto.UserDTO;
 import com.devsuperior.movieflix.entities.User;
@@ -18,11 +20,13 @@ import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 @Service
 public class UserService implements UserDetailsService {
 	
-	private static Logger logger = LoggerFactory.getLogger(UserService.class);
+private static Logger logger = LoggerFactory.getLogger(UserService.class);
+	
+	
+	
 
 	@Autowired
 	private UserRepository repository;
-
 
 	
 	public UserDTO findById(Long id) {
@@ -33,16 +37,16 @@ public class UserService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		User user =  repository.findByEmail(username);
+		    if (user == null) {
+		    	logger.error("User not found" + username);
+		    	throw new UsernameNotFoundException("Email not found");
+		    }
+	    logger.info("User found" + username);
+		return user;
+	}
 	
-			User user = repository.findByEmail(username);
-			if (user == null) {
-				logger.error("User not found" + username);
-				throw new UsernameNotFoundException("Email not found");
-			}
-			logger.info("User found" + username);
-			return user;
-		}
-
 
 	
 	}
