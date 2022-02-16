@@ -54,6 +54,10 @@ public class MovieDTO implements Serializable {
 		
 	}
 	
+	
+
+	
+	
 
 	public Long getId() {
 		return id;
@@ -125,6 +129,8 @@ public class MovieDTO implements Serializable {
 		return reviews;
 	}
 
-	
+	public void setReviews(List<ReviewDTO> reviews) {
+		this.reviews = reviews;
+	}
 	
 }

@@ -29,7 +29,7 @@ public class MovieService {
 	
 	
 	@Transactional(readOnly = true)
-	public Page<MovieDTO> findAllPaged(Long genreId, Pageable pegeable) {
+	public Page<MovieDTO> findByGenre(Long genreId, Pageable pegeable) {
 		Genre genre = (genreId ==0) ? null :genreRepository.getOne(genreId);
 		Page<Movie> page = repository.find(genre, pegeable);
 		repository.findMoviesWithGenres(page.getContent());
