@@ -13,12 +13,11 @@ public class UserDTO implements Serializable {
 
 	private String name;
 
-	
 	private String email;
+
 	private String password;
-	
+
 	Set<RoleDTO> roles = new HashSet<>();
-	
 
 	public UserDTO() {
 
@@ -30,6 +29,7 @@ public class UserDTO implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+
 	}
 
 	public UserDTO(User entity) {
@@ -74,10 +74,8 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 
-	public void setRoles(Set<RoleDTO> roles) {
-		this.roles = roles;
+	public Set<RoleDTO> getRoles() {
+		return roles;
 	}
-	
-	
 
 }

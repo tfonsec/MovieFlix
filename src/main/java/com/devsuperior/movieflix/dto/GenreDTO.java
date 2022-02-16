@@ -16,7 +16,7 @@ public class GenreDTO implements Serializable {
 	}
 
 	public GenreDTO(Long id, String name) {
-		super();
+	
 		this.id = id;
 		this.name = name;
 	}

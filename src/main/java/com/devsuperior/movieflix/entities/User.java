@@ -24,6 +24,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -41,9 +43,12 @@ public class User implements  UserDetails, Serializable {
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "tb_user_role", 
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
 		
@@ -53,13 +58,13 @@ public class User implements  UserDetails, Serializable {
 	}
 
 
-	public User(Long id, String name, String email, String password, Set<Role> roles) {
-		super();
+	public User(Long id, String name, String email, String password) {
+
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.roles = roles;
+		
 	}
 
 

@@ -9,6 +9,7 @@ import com.devsuperior.movieflix.entities.Review;
 public class ReviewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	private Long id;
     
 	@NotBlank(message = "Campo requerido")
@@ -20,11 +21,18 @@ public class ReviewDTO implements Serializable {
     	
     }
 
-	public ReviewDTO(Long id, String text) {
+	
+    
+	public ReviewDTO(Long id, String text, Long movieId, UserDTO user) {
+		super();
 		this.id = id;
 		this.text = text;
+		this.movieId = movieId;
+		this.user = user;
 	}
-    
+
+
+
 	public ReviewDTO(Review entity) {
 		
 		id = entity.getId();
